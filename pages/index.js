@@ -157,6 +157,11 @@ const sections = [
     type: 'long',
   },
   {
+    id: 'chatgpt_results',
+    section: 'One Last Step',
+    type: 'chatgpt',
+  },
+  {
     id: 'confirm',
     type: 'confirm',
   }
@@ -174,11 +179,11 @@ export default function IntakeForm() {
   const inputRef = useRef(null);
 
   const currentSection = sections[step];
-  const totalSteps = sections.length - 2; // exclude intro and confirm
+  const totalSteps = sections.length - 3; // exclude intro, chatgpt, confirm
   const currentStepNum = step - 1; // 0-indexed content steps
 
   useEffect(() => {
-    if (inputRef.current && currentSection?.type !== 'intro' && currentSection?.type !== 'confirm') {
+    if (inputRef.current && currentSection?.type !== 'intro' && currentSection?.type !== 'confirm' && currentSection?.type !== 'chatgpt') {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [step]);
@@ -232,6 +237,7 @@ export default function IntakeForm() {
   const canAdvance = () => {
     if (currentSection.type === 'intro') return true;
     if (currentSection.type === 'confirm') return true;
+    if (currentSection.type === 'chatgpt') return answers.chatgpt_results?.trim().length > 0;
     const required = ['name', 'email'];
     if (required.includes(currentSection.id)) {
       return answers[currentSection.id]?.trim().length > 0;
@@ -243,13 +249,20 @@ export default function IntakeForm() {
     setSubmitting(true);
     setError('');
 
-    const formattedAnswers = sections
-      .filter(s => s.type !== 'intro' && s.type !== 'confirm')
-      .map(s => ({
-        section: s.section,
-        question: s.question,
-        answer: answers[s.id] || ''
-      }));
+    const formattedAnswers = [
+      ...sections
+        .filter(s => s.type !== 'intro' && s.type !== 'confirm' && s.type !== 'chatgpt')
+        .map(s => ({
+          section: s.section,
+          question: s.question,
+          answer: answers[s.id] || ''
+        })),
+      {
+        section: 'ChatGPT Insights',
+        question: 'ChatGPT response to: describe my communication style, top 5 uses, how well each was served',
+        answer: answers.chatgpt_results || ''
+      }
+    ];
 
     try {
       const res = await fetch('/api/submit', {
@@ -278,7 +291,7 @@ export default function IntakeForm() {
   };
 
   const progressPct = currentSection.type === 'intro' ? 0
-    : currentSection.type === 'confirm' ? 100
+    : currentSection.type === 'confirm' || currentSection.type === 'chatgpt' ? 100
     : Math.round((currentStepNum / totalSteps) * 100);
 
   if (submitted) {
@@ -289,44 +302,27 @@ export default function IntakeForm() {
           <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.container} className="animate-fade-up">
-          <div style={styles.logo}>Podcast Impact Studio</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
 
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '2.5rem' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🎯</div>
             <h1 style={styles.heading}>You're in, {answers.name?.split(' ')[0]}.</h1>
-            <p style={styles.subheading}>
-              Your answers are on their way to Tamar. She'll review everything before your call so you hit the ground running.
+            <p style={{ ...styles.subheading, fontSize: '1.1rem' }}>
+              Your answers — including your ChatGPT insights — are on their way to Tamar. She'll review everything before your call so you hit the ground running.
             </p>
           </div>
 
-          <div style={styles.card}>
-            <div style={styles.cardLabel}>Optional — but powerful</div>
-            <h3 style={{ fontSize: '1.1rem', color: '#1A1A1A', marginBottom: '0.75rem', fontWeight: 400, fontFamily: "'Playfair Display', Georgia, serif" }}>
-              While you wait — try this in ChatGPT
-            </h3>
-            <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.7 }}>
-              Paste this prompt before your call. It'll surface insights about how you've been working with AI — and give us even richer material to work with together.
+          <div style={{ marginBottom: '2rem' }}>
+            <p style={{ color: '#444', fontSize: '1rem', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+              Ready to lock in your migration call?
             </p>
-            <div style={styles.promptBox}>
-              <p style={{ color: '#444', fontSize: '0.88rem', lineHeight: 1.8, fontStyle: 'italic', margin: 0 }}>
-                {CHATGPT_PROMPT}
-              </p>
-            </div>
-            <button onClick={copyPrompt} style={styles.copyBtn}>
-              {copied ? '✓ Copied!' : 'Copy Prompt'}
-            </button>
-          </div>
-
-          <div style={{ marginTop: '2rem' }}>
-            <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem' }}>
-              Ready to book your migration call?
-            </p>
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" style={styles.primaryBtn}>
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" style={{ ...styles.primaryBtn, fontSize: '1rem', padding: '1rem 2.5rem' }}>
               Book Your Call →
             </a>
           </div>
 
-          <p style={{ color: '#999', fontSize: '0.8rem', marginTop: '2rem' }}>
+          <p style={{ color: '#999', fontSize: '0.85rem', marginTop: '2.5rem' }}>
             Questions? Email tamar@podcastimpactstudio.com
           </p>
         </div>
@@ -389,7 +385,7 @@ export default function IntakeForm() {
         )}
 
         {/* QUESTIONS */}
-        {currentSection.type !== 'intro' && currentSection.type !== 'confirm' && (
+        {currentSection.type !== 'intro' && currentSection.type !== 'confirm' && currentSection.type !== 'chatgpt' && (
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
@@ -459,9 +455,59 @@ export default function IntakeForm() {
                     fontSize: '0.85rem'
                   }}
                 >
-                  {currentStepNum === totalSteps ? 'Review →' : 'Next →'}
+                  {currentStepNum === totalSteps ? 'Next: ChatGPT Step →' : 'Next →'}
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* CHATGPT STEP */}
+        {currentSection.type === 'chatgpt' && (
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
+            <div style={styles.sectionLabel}>One Last Step</div>
+            <h2 style={styles.question}>Run this prompt in ChatGPT — then paste the results here.</h2>
+            <p style={styles.hint}>
+              This gives us a head start on understanding your communication style and how you've been using AI. Open ChatGPT, copy the prompt below, paste it in, then bring the response back here.
+            </p>
+
+            <div style={styles.promptBox}>
+              <p style={{ color: '#333', fontSize: '0.92rem', lineHeight: 1.8, fontStyle: 'italic', margin: 0 }}>
+                {CHATGPT_PROMPT}
+              </p>
+            </div>
+            <button onClick={copyPrompt} style={{ ...styles.copyBtn, marginBottom: '1.5rem', display: 'inline-block' }}>
+              {copied ? '✓ Copied!' : 'Copy Prompt'}
+            </button>
+
+            <div style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#CC1818', margin: '1.5rem 0 0.5rem' }}>
+              Paste ChatGPT's response here
+            </div>
+            <textarea
+              value={answers.chatgpt_results || ''}
+              onChange={e => setAnswers(prev => ({ ...prev, chatgpt_results: e.target.value }))}
+              placeholder="Paste what ChatGPT said here..."
+              rows={8}
+              style={styles.textarea}
+            />
+
+            <div style={styles.navRow}>
+              <button onClick={handleBack} style={styles.backBtn}>← Back</button>
+              <button
+                onClick={handleNext}
+                disabled={!canAdvance()}
+                style={{
+                  ...styles.primaryBtn,
+                  opacity: canAdvance() ? 1 : 0.3,
+                  cursor: canAdvance() ? 'pointer' : 'default',
+                  padding: '0.7rem 1.5rem',
+                  fontSize: '0.85rem'
+                }}
+              >
+                Review My Answers →
+              </button>
             </div>
           </div>
         )}
@@ -473,25 +519,38 @@ export default function IntakeForm() {
             <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
             <h2 style={styles.heading}>Looking good, {answers.name?.split(' ')[0] || 'friend'}.</h2>
             <p style={styles.subheading}>
-              Here's everything you've shared. Take a look — edit anything that doesn't feel right — then hit submit.
+              Here's everything you've shared. Click any answer to go back and edit it — then hit submit when you're ready.
             </p>
 
             <div style={{ marginBottom: '2rem' }}>
               {sections
-                .filter(s => s.type !== 'intro' && s.type !== 'confirm')
-                .map((s, i) => (
-                  <div key={i} style={styles.reviewItem}>
-                    <div style={styles.reviewSection}>{s.section}</div>
-                    <div style={styles.reviewQuestion}>{s.question}</div>
-                    <div style={styles.reviewAnswer}>
-                      {answers[s.id] || <span style={{ color: '#444', fontStyle: 'italic' }}>Not answered</span>}
+                .filter(s => s.type !== 'intro' && s.type !== 'confirm' && s.type !== 'chatgpt')
+                .map((s, i) => {
+                  const sectionIndex = sections.findIndex(sec => sec.id === s.id);
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => setStep(sectionIndex)}
+                      style={{ ...styles.reviewItem, cursor: 'pointer' }}
+                      title="Click to edit"
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <div style={{ flex: 1 }}>
+                          <div style={styles.reviewSection}>{s.section}</div>
+                          <div style={styles.reviewQuestion}>{s.question}</div>
+                          <div style={styles.reviewAnswer}>
+                            {answers[s.id] || <span style={{ color: '#999', fontStyle: 'italic' }}>Not answered — click to add</span>}
+                          </div>
+                        </div>
+                        <div style={{ color: '#CC1818', fontSize: '0.75rem', letterSpacing: '0.05em', marginLeft: '1rem', marginTop: '0.25rem', flexShrink: 0 }}>Edit</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
             </div>
 
             {error && (
-              <div style={{ color: '#E07B6A', fontSize: '0.88rem', marginBottom: '1rem' }}>
+              <div style={{ color: '#CC1818', fontSize: '0.92rem', marginBottom: '1rem' }}>
                 {error}
               </div>
             )}
@@ -690,12 +749,12 @@ const styles = {
     marginBottom: '0.25rem',
   },
   reviewQuestion: {
-    fontSize: '0.88rem',
+    fontSize: '0.95rem',
     color: '#444',
     marginBottom: '0.4rem',
   },
   reviewAnswer: {
-    fontSize: '0.95rem',
+    fontSize: '1rem',
     color: '#1A1A1A',
     lineHeight: 1.6,
     whiteSpace: 'pre-wrap',
