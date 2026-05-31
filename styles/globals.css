@@ -6,14 +6,13 @@
 
 :root {
   --red: #CC1818;
-  --red-dim: #991212;
-  --bg: #0F0F0F;
-  --bg-card: #141414;
-  --bg-elevated: #1A1A1A;
-  --border: #2A2A2A;
-  --text: #F0EDE8;
-  --text-muted: #888;
-  --text-dim: #555;
+  --bg: #EDE8E0;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F5F1EB;
+  --border: #D8D2C8;
+  --text: #1A1A1A;
+  --text-muted: #666;
+  --text-dim: #999;
 }
 
 html, body {
@@ -25,8 +24,8 @@ html, body {
 }
 
 ::selection {
-  background: var(--gold);
-  color: #0F0F0F;
+  background: var(--red);
+  color: #FFFFFF;
 }
 
 textarea, input {

@@ -301,14 +301,14 @@ export default function IntakeForm() {
 
           <div style={styles.card}>
             <div style={styles.cardLabel}>Optional — but powerful</div>
-            <h3 style={{ fontSize: '1.1rem', color: '#F0EDE8', marginBottom: '0.75rem', fontWeight: 400 }}>
+            <h3 style={{ fontSize: '1.1rem', color: '#1A1A1A', marginBottom: '0.75rem', fontWeight: 400, fontFamily: "'Playfair Display', Georgia, serif" }}>
               While you wait — try this in ChatGPT
             </h3>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.7 }}>
+            <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.7 }}>
               Paste this prompt before your call. It'll surface insights about how you've been working with AI — and give us even richer material to work with together.
             </p>
             <div style={styles.promptBox}>
-              <p style={{ color: '#C8C4BC', fontSize: '0.88rem', lineHeight: 1.8, fontStyle: 'italic', margin: 0 }}>
+              <p style={{ color: '#444', fontSize: '0.88rem', lineHeight: 1.8, fontStyle: 'italic', margin: 0 }}>
                 {CHATGPT_PROMPT}
               </p>
             </div>
@@ -318,7 +318,7 @@ export default function IntakeForm() {
           </div>
 
           <div style={{ marginTop: '2rem' }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '1rem' }}>
+            <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem' }}>
               Ready to book your migration call?
             </p>
             <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" style={styles.primaryBtn}>
@@ -326,7 +326,7 @@ export default function IntakeForm() {
             </a>
           </div>
 
-          <p style={{ color: '#444', fontSize: '0.8rem', marginTop: '2rem' }}>
+          <p style={{ color: '#999', fontSize: '0.8rem', marginTop: '2rem' }}>
             Questions? Email tamar@podcastimpactstudio.com
           </p>
         </div>
@@ -362,7 +362,7 @@ export default function IntakeForm() {
             <p style={{ ...styles.subheading, maxWidth: '480px' }}>
               Before we build your Claude, we need to understand how you think, how you work, and what you've loved — and hated — about AI so far.
             </p>
-            <p style={{ color: '#666', fontSize: '0.88rem', marginBottom: '2.5rem' }}>
+            <p style={{ color: '#999', fontSize: '0.88rem', marginBottom: '2.5rem' }}>
               Takes about 15–20 minutes. Talk to text works on every question. No wrong answers.
             </p>
             <button onClick={handleNext} style={styles.primaryBtn}>
@@ -408,8 +408,9 @@ export default function IntakeForm() {
                 onClick={isListening ? stopListening : startListening}
                 style={{
                   ...styles.micBtn,
-                  background: isListening ? '#CC1818' : '#1A1A1A',
-                  color: isListening ? '#FFFFFF' : '#666',
+                  background: isListening ? '#CC1818' : '#EDE8E0',
+                  color: isListening ? '#FFFFFF' : '#999',
+                  border: isListening ? 'none' : '1px solid #D8D2C8',
                 }}
                 title={isListening ? 'Stop recording' : 'Speak your answer'}
               >
@@ -426,7 +427,7 @@ export default function IntakeForm() {
             <div style={styles.navRow}>
               <button onClick={handleBack} style={styles.backBtn}>← Back</button>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ color: '#444', fontSize: '0.8rem' }}>
+                <span style={{ color: '#999', fontSize: '0.8rem' }}>
                   {currentStepNum} / {totalSteps}
                 </span>
                 <button
@@ -500,7 +501,7 @@ export default function IntakeForm() {
 const styles = {
   page: {
     minHeight: '100vh',
-    background: '#0F0F0F',
+    background: '#EDE8E0',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -515,7 +516,7 @@ const styles = {
     fontSize: '0.65rem',
     letterSpacing: '0.2em',
     textTransform: 'uppercase',
-    color: '#444',
+    color: '#999',
     marginBottom: '2rem',
   },
   badge: {
@@ -532,13 +533,13 @@ const styles = {
     fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
     fontWeight: 400,
     fontFamily: "'Playfair Display', Georgia, serif",
-    color: '#F0EDE8',
+    color: '#1A1A1A',
     lineHeight: 1.15,
     marginBottom: '1rem',
   },
   subheading: {
     fontSize: '1rem',
-    color: '#888',
+    color: '#555',
     lineHeight: 1.8,
     marginBottom: '1.5rem',
     fontStyle: 'italic',
@@ -554,23 +555,23 @@ const styles = {
     fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
     fontWeight: 400,
     fontFamily: "'Playfair Display', Georgia, serif",
-    color: '#F0EDE8',
+    color: '#1A1A1A',
     lineHeight: 1.3,
     marginBottom: '0.5rem',
   },
   hint: {
     fontSize: '0.88rem',
-    color: '#666',
+    color: '#777',
     fontStyle: 'italic',
     marginBottom: '1rem',
     lineHeight: 1.6,
   },
   textarea: {
     width: '100%',
-    background: '#141414',
-    border: '1px solid #2A2A2A',
+    background: '#FFFFFF',
+    border: '1px solid #D8D2C8',
     borderRadius: 0,
-    color: '#F0EDE8',
+    color: '#1A1A1A',
     fontSize: '0.95rem',
     padding: '1rem 3.5rem 1rem 1rem',
     lineHeight: 1.8,
@@ -580,10 +581,10 @@ const styles = {
   },
   input: {
     width: '100%',
-    background: '#141414',
-    border: '1px solid #2A2A2A',
+    background: '#FFFFFF',
+    border: '1px solid #D8D2C8',
     borderRadius: 0,
-    color: '#F0EDE8',
+    color: '#1A1A1A',
     fontSize: '0.95rem',
     padding: '0.9rem 3.5rem 0.9rem 1rem',
     outline: 'none',
@@ -624,8 +625,8 @@ const styles = {
   },
   backBtn: {
     background: 'transparent',
-    border: '1px solid #2A2A2A',
-    color: '#666',
+    border: '1px solid #C8C2B8',
+    color: '#888',
     padding: '0.7rem 1.25rem',
     fontSize: '0.82rem',
     cursor: 'pointer',
@@ -633,8 +634,8 @@ const styles = {
     letterSpacing: '0.05em',
   },
   card: {
-    background: '#141414',
-    border: '1px solid #2A2A2A',
+    background: '#FFFFFF',
+    border: '1px solid #D8D2C8',
     padding: '1.5rem',
     marginTop: '1.5rem',
   },
@@ -646,15 +647,15 @@ const styles = {
     marginBottom: '0.5rem',
   },
   promptBox: {
-    background: '#0F0F0F',
-    border: '1px solid #2A2A2A',
+    background: '#F5F1EB',
+    border: '1px solid #D8D2C8',
     borderLeft: '3px solid #CC1818',
     padding: '1rem 1.25rem',
     marginBottom: '1rem',
   },
   copyBtn: {
     background: 'transparent',
-    border: '1px solid #2A2A2A',
+    border: '1px solid #C8C2B8',
     color: '#888',
     padding: '0.5rem 1rem',
     fontSize: '0.8rem',
@@ -664,7 +665,7 @@ const styles = {
   },
   reviewItem: {
     padding: '1rem 0',
-    borderBottom: '1px solid #1A1A1A',
+    borderBottom: '1px solid #D8D2C8',
   },
   reviewSection: {
     fontSize: '0.6rem',
@@ -675,12 +676,12 @@ const styles = {
   },
   reviewQuestion: {
     fontSize: '0.8rem',
-    color: '#666',
+    color: '#777',
     marginBottom: '0.4rem',
   },
   reviewAnswer: {
     fontSize: '0.9rem',
-    color: '#C8C4BC',
+    color: '#2A2A2A',
     lineHeight: 1.6,
     whiteSpace: 'pre-wrap',
   },
@@ -689,8 +690,8 @@ const styles = {
     top: 0,
     left: 0,
     right: 0,
-    height: '2px',
-    background: '#1A1A1A',
+    height: '3px',
+    background: '#D8D2C8',
     zIndex: 100,
   },
   progressFill: {
