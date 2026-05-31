@@ -354,7 +354,7 @@ export default function IntakeForm() {
         {/* INTRO */}
         {currentSection.type === 'intro' && (
           <div>
-            <div style={styles.logo}>Podcast Impact Studio</div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
             <div style={styles.badge}>AI Migration — Pre-Work</div>
             <h1 style={{ ...styles.heading, fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
               Your AI.<br />Set up right.<br />Built around you.
@@ -374,7 +374,7 @@ export default function IntakeForm() {
         {/* QUESTIONS */}
         {currentSection.type !== 'intro' && currentSection.type !== 'confirm' && (
           <div>
-            <div style={styles.logo}>Podcast Impact Studio</div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
             <div style={styles.sectionLabel}>{currentSection.section}</div>
             <h2 style={styles.question}>{currentSection.question}</h2>
             {currentSection.hint && (
@@ -451,7 +451,7 @@ export default function IntakeForm() {
         {/* CONFIRM */}
         {currentSection.type === 'confirm' && (
           <div>
-            <div style={styles.logo}>Podcast Impact Studio</div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
             <h2 style={styles.heading}>Looking good, {answers.name?.split(' ')[0] || 'friend'}.</h2>
             <p style={styles.subheading}>
               Here's everything you've shared. Take a look — edit anything that doesn't feel right — then hit submit.
@@ -513,10 +513,6 @@ const styles = {
     maxWidth: '600px',
   },
   logo: {
-    fontSize: '0.65rem',
-    letterSpacing: '0.2em',
-    textTransform: 'uppercase',
-    color: '#999',
     marginBottom: '2rem',
   },
   badge: {
