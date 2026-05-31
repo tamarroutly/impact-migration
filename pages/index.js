@@ -354,7 +354,8 @@ export default function IntakeForm() {
         {/* INTRO */}
         {currentSection.type === 'intro' && (
           <div>
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
             <div style={styles.badge}>AI Migration — Pre-Work</div>
             <h1 style={{ ...styles.heading, fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
               Your AI.<br />Set up right.<br />Built around you.
@@ -362,7 +363,7 @@ export default function IntakeForm() {
             <p style={{ ...styles.subheading, maxWidth: '480px' }}>
               Before we build your Claude, we need to understand how you think, how you work, and what you've loved — and hated — about AI so far.
             </p>
-            <p style={{ color: '#999', fontSize: '0.88rem', marginBottom: '2.5rem' }}>
+            <p style={{ color: '#444', fontSize: '0.95rem', marginBottom: '2.5rem' }}>
               Takes about 15–20 minutes. Talk to text works on every question. No wrong answers.
             </p>
             <button onClick={handleNext} style={styles.primaryBtn}>
@@ -374,7 +375,8 @@ export default function IntakeForm() {
         {/* QUESTIONS */}
         {currentSection.type !== 'intro' && currentSection.type !== 'confirm' && (
           <div>
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
             <div style={styles.sectionLabel}>{currentSection.section}</div>
             <h2 style={styles.question}>{currentSection.question}</h2>
             {currentSection.hint && (
@@ -427,7 +429,7 @@ export default function IntakeForm() {
             <div style={styles.navRow}>
               <button onClick={handleBack} style={styles.backBtn}>← Back</button>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ color: '#999', fontSize: '0.8rem' }}>
+                <span style={{ color: '#555', fontSize: '0.85rem' }}>
                   {currentStepNum} / {totalSteps}
                 </span>
                 <button
@@ -451,7 +453,8 @@ export default function IntakeForm() {
         {/* CONFIRM */}
         {currentSection.type === 'confirm' && (
           <div>
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '36px', width: 'auto' }} /></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
             <h2 style={styles.heading}>Looking good, {answers.name?.split(' ')[0] || 'friend'}.</h2>
             <p style={styles.subheading}>
               Here's everything you've shared. Take a look — edit anything that doesn't feel right — then hit submit.
@@ -534,21 +537,21 @@ const styles = {
     marginBottom: '1rem',
   },
   subheading: {
-    fontSize: '1rem',
-    color: '#555',
+    fontSize: '1.05rem',
+    color: '#333',
     lineHeight: 1.8,
     marginBottom: '1.5rem',
     fontStyle: 'italic',
   },
   sectionLabel: {
-    fontSize: '0.65rem',
+    fontSize: '0.7rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     color: '#CC1818',
     marginBottom: '0.75rem',
   },
   question: {
-    fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
     fontWeight: 400,
     fontFamily: "'Playfair Display', Georgia, serif",
     color: '#1A1A1A',
@@ -556,8 +559,8 @@ const styles = {
     marginBottom: '0.5rem',
   },
   hint: {
-    fontSize: '0.88rem',
-    color: '#777',
+    fontSize: '0.92rem',
+    color: '#444',
     fontStyle: 'italic',
     marginBottom: '1rem',
     lineHeight: 1.6,
@@ -622,7 +625,7 @@ const styles = {
   backBtn: {
     background: 'transparent',
     border: '1px solid #C8C2B8',
-    color: '#888',
+    color: '#444',
     padding: '0.7rem 1.25rem',
     fontSize: '0.82rem',
     cursor: 'pointer',
@@ -671,13 +674,13 @@ const styles = {
     marginBottom: '0.25rem',
   },
   reviewQuestion: {
-    fontSize: '0.8rem',
-    color: '#777',
+    fontSize: '0.88rem',
+    color: '#444',
     marginBottom: '0.4rem',
   },
   reviewAnswer: {
-    fontSize: '0.9rem',
-    color: '#2A2A2A',
+    fontSize: '0.95rem',
+    color: '#1A1A1A',
     lineHeight: 1.6,
     whiteSpace: 'pre-wrap',
   },
