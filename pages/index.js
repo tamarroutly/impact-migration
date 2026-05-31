@@ -363,9 +363,25 @@ export default function IntakeForm() {
             <p style={{ ...styles.subheading, maxWidth: '480px' }}>
               Before we build your Claude, we need to understand how you think, how you work, and what you've loved — and hated — about AI so far.
             </p>
-            <p style={{ color: '#444', fontSize: '0.95rem', marginBottom: '2.5rem' }}>
-              Takes about 15–20 minutes. Talk to text works on every question. No wrong answers.
-            </p>
+
+            {/* Instructions */}
+            <div style={{ background: '#FFFFFF', border: '1px solid #D8D2C8', borderLeft: '3px solid #CC1818', padding: '1.25rem 1.5rem', marginBottom: '2rem', maxWidth: '480px' }}>
+              <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#CC1818', marginBottom: '0.75rem' }}>Before you begin</div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {[
+                  '📋  No prep needed — all answers come from memory.',
+                  '🎙  Talk to text works on every single question. Just hit the mic.',
+                  '⏱  Takes about 15–20 minutes. There\'s no rush.',
+                  '💬  At the end, we\'ll give you one short prompt to run in ChatGPT before your call — you don\'t need it open now.',
+                  '✅  You\'ll review everything before you submit. Nothing sends until you\'re ready.',
+                ].map((item, i) => (
+                  <li key={i} style={{ fontSize: '0.92rem', color: '#333', lineHeight: 1.7, paddingBottom: i < 4 ? '0.5rem' : 0 }}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <button onClick={handleNext} style={styles.primaryBtn}>
               Let's do this →
             </button>
