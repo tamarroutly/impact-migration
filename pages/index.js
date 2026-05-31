@@ -355,7 +355,7 @@ export default function IntakeForm() {
         {currentSection.type === 'intro' && (
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
             <div style={styles.badge}>AI Migration — Pre-Work</div>
             <h1 style={{ ...styles.heading, fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
               Your AI.<br />Set up right.<br />Built around you.
@@ -376,7 +376,7 @@ export default function IntakeForm() {
         {currentSection.type !== 'intro' && currentSection.type !== 'confirm' && (
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
             <div style={styles.sectionLabel}>{currentSection.section}</div>
             <h2 style={styles.question}>{currentSection.question}</h2>
             {currentSection.hint && (
@@ -454,7 +454,7 @@ export default function IntakeForm() {
         {currentSection.type === 'confirm' && (
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '44px', width: 'auto', display: 'block' }} /></div>
+            <div style={styles.logo}><img src="/logo.png" alt="Podcast Impact Studio" style={{ height: '132px', width: 'auto', display: 'block' }} /></div>
             <h2 style={styles.heading}>Looking good, {answers.name?.split(' ')[0] || 'friend'}.</h2>
             <p style={styles.subheading}>
               Here's everything you've shared. Take a look — edit anything that doesn't feel right — then hit submit.
