@@ -284,7 +284,10 @@ export default function IntakeForm() {
   if (submitted) {
     return (
       <div style={styles.page}>
-        <Head><title>You're booked — Impact Studio AI Migration</title></Head>
+        <Head>
+          <title>You're booked — Impact Studio AI Migration</title>
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+        </Head>
         <div style={styles.container} className="animate-fade-up">
           <div style={styles.logo}>Podcast Impact Studio</div>
 
@@ -336,6 +339,7 @@ export default function IntakeForm() {
       <Head>
         <title>Impact Studio AI Migration — Pre-Work</title>
         <meta name="description" content="Your Claude migration starts here. Answer a few questions so we can build your AI exactly the way you work." />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
       </Head>
 
       {/* Progress bar */}
@@ -404,8 +408,8 @@ export default function IntakeForm() {
                 onClick={isListening ? stopListening : startListening}
                 style={{
                   ...styles.micBtn,
-                  background: isListening ? '#C8A96E' : '#1A1A1A',
-                  color: isListening ? '#0F0F0F' : '#666',
+                  background: isListening ? '#CC1818' : '#1A1A1A',
+                  color: isListening ? '#FFFFFF' : '#666',
                 }}
                 title={isListening ? 'Stop recording' : 'Speak your answer'}
               >
@@ -414,7 +418,7 @@ export default function IntakeForm() {
             </div>
 
             {isListening && (
-              <p style={{ color: '#C8A96E', fontSize: '0.8rem', marginBottom: '1rem', letterSpacing: '0.05em' }}>
+              <p style={{ color: '#CC1818', fontSize: '0.8rem', marginBottom: '1rem', letterSpacing: '0.05em', fontStyle: 'italic' }}>
                 ● Listening... speak naturally
               </p>
             )}
@@ -519,14 +523,15 @@ const styles = {
     fontSize: '0.65rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: '#C8A96E',
-    border: '1px solid #C8A96E',
+    color: '#CC1818',
+    border: '1px solid #CC1818',
     padding: '0.25rem 0.75rem',
     marginBottom: '1.5rem',
   },
   heading: {
     fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
     fontWeight: 400,
+    fontFamily: "'Playfair Display', Georgia, serif",
     color: '#F0EDE8',
     lineHeight: 1.15,
     marginBottom: '1rem',
@@ -542,12 +547,13 @@ const styles = {
     fontSize: '0.65rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: '#C8A96E',
+    color: '#CC1818',
     marginBottom: '0.75rem',
   },
   question: {
     fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
     fontWeight: 400,
+    fontFamily: "'Playfair Display', Georgia, serif",
     color: '#F0EDE8',
     lineHeight: 1.3,
     marginBottom: '0.5rem',
@@ -604,14 +610,14 @@ const styles = {
     marginTop: '1rem',
   },
   primaryBtn: {
-    background: '#C8A96E',
-    color: '#0F0F0F',
+    background: '#CC1818',
+    color: '#FFFFFF',
     border: 'none',
     padding: '0.85rem 2rem',
     fontSize: '0.9rem',
     letterSpacing: '0.05em',
     cursor: 'pointer',
-    fontFamily: 'Georgia, serif',
+    fontFamily: "'Playfair Display', Georgia, serif",
     textDecoration: 'none',
     display: 'inline-block',
     transition: 'opacity 0.15s',
@@ -636,13 +642,13 @@ const styles = {
     fontSize: '0.65rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: '#C8A96E',
+    color: '#CC1818',
     marginBottom: '0.5rem',
   },
   promptBox: {
     background: '#0F0F0F',
     border: '1px solid #2A2A2A',
-    borderLeft: '3px solid #C8A96E',
+    borderLeft: '3px solid #CC1818',
     padding: '1rem 1.25rem',
     marginBottom: '1rem',
   },
@@ -664,7 +670,7 @@ const styles = {
     fontSize: '0.6rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: '#C8A96E',
+    color: '#CC1818',
     marginBottom: '0.25rem',
   },
   reviewQuestion: {
@@ -689,7 +695,7 @@ const styles = {
   },
   progressFill: {
     height: '100%',
-    background: '#C8A96E',
+    background: '#CC1818',
     transition: 'width 0.4s ease',
   },
 };
