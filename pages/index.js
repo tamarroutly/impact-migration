@@ -313,9 +313,40 @@ export default function IntakeForm() {
             </p>
           </div>
 
+          {/* ChatGPT Export Instructions */}
+          <div style={{ background: '#FFFFFF', border: '1px solid #D8D2C8', borderLeft: '3px solid #CC1818', padding: '1.5rem', marginBottom: '2rem' }}>
+            <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#CC1818', marginBottom: '0.75rem' }}>Before You Book — Important</div>
+            <h3 style={{ fontSize: '1.15rem', fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 400, color: '#1A1A1A', marginBottom: '0.75rem' }}>
+              Export your full ChatGPT history and email it to us.
+            </h3>
+            <p style={{ fontSize: '0.95rem', color: '#333', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+              This saves us up to an hour on your call — we'll review it ahead of time so we can hit the ground running. The export can take up to 24 hours to arrive, so <strong>please book your call no earlier than 48 hours after you request the export.</strong>
+            </p>
+
+            <div style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#666', marginBottom: '0.75rem' }}>How to export your ChatGPT history</div>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0 0 1.25rem' }}>
+              {[
+                'Go to chatgpt.com and log in',
+                'Click your profile picture (top right)',
+                'Click Settings',
+                'Click Data Controls',
+                'Click Export Data',
+                'Click Confirm Export',
+                'ChatGPT emails you a download link — usually arrives within a few minutes',
+                'Download the zip file and open it',
+              ].map((step, i) => (
+                <li key={i} style={{ fontSize: '0.95rem', color: '#333', lineHeight: 1.8 }}>{step}</li>
+              ))}
+            </ol>
+
+            <div style={{ background: '#F5F1EB', border: '1px solid #D8D2C8', padding: '0.85rem 1rem', fontSize: '0.95rem', color: '#1A1A1A' }}>
+              📧 Email the zip file to <strong>info@podcastimpactstudio.com</strong> with your name in the subject line.
+            </div>
+          </div>
+
           <div style={{ marginBottom: '2rem' }}>
-            <p style={{ color: '#444', fontSize: '1rem', marginBottom: '1.25rem', lineHeight: 1.7 }}>
-              Ready to lock in your migration call?
+            <p style={{ color: '#444', fontSize: '1rem', marginBottom: '0.5rem', lineHeight: 1.7 }}>
+              Once you've sent the export, book your call — <strong>at least 48 hours out.</strong>
             </p>
             <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" style={{ ...styles.primaryBtn, fontSize: '1rem', padding: '1rem 2.5rem' }}>
               Book Your Call →
