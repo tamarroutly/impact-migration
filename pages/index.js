@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; // eslint-disable-line no-unused-vars
 import Head from 'next/head';
 
 const BOOKING_URL = 'https://tidycal.com/podcast-impact-studio/60-minute-meeting';
@@ -65,21 +65,22 @@ const sections = [
   {
     id: 'ai_platform',
     section: 'Your AI History',
-    question: 'What AI platform have you been using and for how long?',
-    placeholder: 'e.g. ChatGPT for 2 years...',
+    question: 'What AI platform(s) have you been using and for how long?',
+    hint: 'Many people use more than one — list all of them.',
+    placeholder: 'e.g. ChatGPT for 2 years, Gemini for 6 months...',
     type: 'short',
   },
   {
     id: 'ai_love',
     section: 'Your AI History',
-    question: 'What did you absolutely love about it? What worked so well you\'re afraid to lose it?',
+    question: 'What did you absolutely love about them? What worked so well you\'re afraid to lose it?',
     placeholder: 'The things that were genuinely great...',
     type: 'long',
   },
   {
     id: 'ai_frustrate',
     section: 'Your AI History',
-    question: 'What frustrated you? What made you feel like it was never quite right?',
+    question: 'What frustrated you? What made you feel like they were never quite right?',
     placeholder: 'Be honest — what drove you crazy...',
     type: 'long',
   },
@@ -397,7 +398,7 @@ export default function IntakeForm() {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {[
                   '📋  No prep needed — all answers come from memory.',
-                  '🎙  Talk to text works on every single question. Just hit the mic.',
+                  '🎙  Want to talk instead of type? Use Superwhisper, WhisperFlow, or TalkTastic to dictate straight into each answer box.',
                   '⏱  Takes about 15–20 minutes. There\'s no rush.',
                   '💬  At the end, we\'ll give you one short prompt to run in ChatGPT before your call — you don\'t need it open now.',
                   '✅  You\'ll review everything before you submit. Nothing sends until you\'re ready.',
@@ -426,7 +427,11 @@ export default function IntakeForm() {
               <p style={styles.hint}>{currentSection.hint}</p>
             )}
 
-            <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+            <div style={{ background: '#F5F1EB', border: '1px solid #D8D2C8', padding: '0.6rem 0.9rem', marginBottom: '0.75rem', fontSize: '0.82rem', color: '#555', lineHeight: 1.6 }}>
+              🎙 <strong>Prefer to talk?</strong> Use <a href="https://superwhisper.com" target="_blank" rel="noopener noreferrer" style={{ color: '#CC1818' }}>Superwhisper</a>, <a href="https://whisperflow.app" target="_blank" rel="noopener noreferrer" style={{ color: '#CC1818' }}>WhisperFlow</a>, or <a href="https://www.toolify.ai/tool/talktastic" target="_blank" rel="noopener noreferrer" style={{ color: '#CC1818' }}>TalkTastic</a> to dictate your answer directly into the box below.
+            </div>
+
+            <div style={{ marginBottom: '1.5rem' }}>
               {currentSection.type === 'long' ? (
                 <textarea
                   ref={inputRef}
@@ -447,27 +452,7 @@ export default function IntakeForm() {
                   onKeyDown={e => e.key === 'Enter' && canAdvance() && handleNext()}
                 />
               )}
-
-              {/* Mic button */}
-              <button
-                onClick={isListening ? stopListening : startListening}
-                style={{
-                  ...styles.micBtn,
-                  background: isListening ? '#CC1818' : '#EDE8E0',
-                  color: isListening ? '#FFFFFF' : '#999',
-                  border: isListening ? 'none' : '1px solid #D8D2C8',
-                }}
-                title={isListening ? 'Stop recording' : 'Speak your answer'}
-              >
-                {isListening ? '⏹' : '🎙'}
-              </button>
             </div>
-
-            {isListening && (
-              <p style={{ color: '#CC1818', fontSize: '0.8rem', marginBottom: '1rem', letterSpacing: '0.05em', fontStyle: 'italic' }}>
-                ● Listening... speak naturally
-              </p>
-            )}
 
             <div style={styles.navRow}>
               <button onClick={handleBack} style={styles.backBtn}>← Back</button>
